@@ -1,14 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
+import { space, width, fontSize, color } from 'styled-system'
+import { theme } from '../../../src/main'
 
 export interface Props {
-  /**  Button appearance- primary, secondary, disabled **/
+  /**  Appearance - primary, secondary, disabled **/
   appearance: string;
-  /** Button kind - solid, outline, link **/
+  /** Kind - solid, outline, link **/
   kind?: string;
-  backgroundColor?: string;
+  bg?: string;
   size?: string;
-  /** Text you want to display in your button, or an icon **/
   children: string;
   onClick?: () => void;
 }
@@ -20,32 +21,63 @@ const SIZES = {
 }
 
 export const StyledButton = styled.button<Props>`
-  border: 1px solid ${(props) => props.theme?.colors.success};
+  background: ${(props) => (props.bg ? props.bg : '#fff')};
+  border: 1px solid ${(props) => props.appearance ? `${theme.colors[props.appearance]}` : theme.colors.primary };
   border-radius: 3px;
   cursor: pointer;
-  color: ${(props) => props.theme?.colors.primary};
-  background: ${(props) => (props.backgroundColor ? props.backgroundColor : props.backgroundColor)};
+  color: ${ theme.colors.primary };
   padding: ${(props) => (props.size === SIZES.SMALL ? '8px 16px' : '13px 20px')};
-  font-size: ${(props) => (props.size === SIZES.SMALL ? '12px' : props.size === SIZES.MEDIUM ? '16px' : '20px')};
+  font-size: ${(props) => props.size ? `${theme.fontSizes[props.size]}px` : '12px' };
+
+  ${(props) =>
+    props.appearance === 'primary' &&
+    `
+      color: ${(props.bg ? '#fff' : theme.colors[props.appearance])};
+      border: 1px solid ${(props.bg ? props.bg : theme.colors[props.appearance])};
+    `
+  }
+
+  ${(props) =>
+    props.appearance === 'secondary' &&
+    `
+      color: #FFF;
+      background: ${ theme.colors.secondary };
+    `
+  }
+
+  ${(props) =>
+    props.appearance === 'disabled' &&
+    `
+      background: ${ theme.colors.disabled };
+      color: #FFF;
+      cursor: default;
+      pointer-events: none;
+    `
+  }
 `
 
 export const Button: React.FC<Props> = ({
   appearance,
-  backgroundColor,
+  bg,
   size,
   children,
   kind,
-  onClick
-}) => (
-  <StyledButton
-    appearance={appearance}
-    backgroundColor={backgroundColor}
-    size={size}
-    kind={kind}
-    onClick={onClick}
-  >
-    {children}
-  </StyledButton>
-)
+  onClick,
+}) => {
+  // const Theme = useContext(ThemeContext)
+  // console.log(Theme)
+
+  return (
+    <StyledButton
+      appearance={appearance}
+      bg={bg}
+      size={size}
+      kind={kind}
+      onClick={onClick}
+    >
+      {children}
+    </StyledButton>
+  )
+}
 
 export default Button

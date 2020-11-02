@@ -1,1 +1,1 @@
-export * from "./";
+export const theme: any;

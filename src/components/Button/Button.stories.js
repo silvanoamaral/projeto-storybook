@@ -8,7 +8,7 @@ export default {
   component: Button,
   // decorators: [withKnobs],
   argTypes: {
-    backgroundColor: { control: 'color' },
+    bg: { control: 'color' },
     size: { control: { type: 'select', options: ['small', 'medium', 'large'] } },
     appearance: { control: { type: 'select', options: ['primary', 'secondary', 'disabled'] } },
     kind: { control: { type: 'select', options: ['solid', 'outline', 'link'] } }
@@ -66,31 +66,37 @@ const Template = (args) => <Button {...args} />
 export const Primary = Template.bind({})
 Primary.args = {
   children: 'Button',
-  backgroundColor: '#000',
   appearance: 'primary',
 }
 
 export const Secondary = Template.bind({})
 Secondary.args = {
-  appearance: 'secondary',
   children: 'Button',
+  appearance: 'secondary',
   size: 'small',
 }
 
 export const Small = Template.bind({})
 Small.args = {
-  size: 'small',
   children: 'Button',
+  size: 'small',
 }
 
 export const Medium = Template.bind({})
 Medium.args = {
-  size: 'medium',
   children: 'Button',
+  size: 'medium',
 }
 
 export const Large = Template.bind({})
 Large.args = {
-  size: 'large',
   children: 'Button',
+  size: 'large',
+}
+
+export const Disabled = Template.bind({})
+Disabled.args = {
+  appearance: 'disabled',
+  children: 'Button',
+  size: 'medium',
 }
