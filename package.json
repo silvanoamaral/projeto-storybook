@@ -1,11 +1,14 @@
 {
   "name": "projeto-storybook",
-  "version": "3.0.0",
+  "version": "4.1.0",
   "description": "",
   "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build": "tsc -p ."
+    "build-storybook": "build-storybook -s public",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
