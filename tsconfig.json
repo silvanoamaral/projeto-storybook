@@ -5,6 +5,9 @@
     "dist",
     "./stories"
   ],
+  "include": [
+    "src/**/*"
+  ],
   "compilerOptions": {
     "skipLibCheck": true,
     /* Basic Options */

@@ -1,7 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
-import { space, width, fontSize, color } from 'styled-system'
-import { theme } from '../../../src/main'
+import React, { useContext } from 'react'
+import styled, {ThemeContext } from 'styled-components'
 
 export interface Props {
   /**  Appearance - primary, secondary, disabled **/
@@ -22,18 +20,18 @@ const SIZES = {
 
 export const StyledButton = styled.button<Props>`
   background: ${(props) => (props.bg ? props.bg : '#fff')};
-  border: 1px solid ${(props) => props.appearance ? `${theme.colors[props.appearance]}` : theme.colors.primary };
+  border: 1px solid ${(props) => props.appearance ? `${props.theme.colors[props.appearance]}` : props.theme.colors.primary };
   border-radius: 3px;
   cursor: pointer;
-  color: ${ theme.colors.primary };
+  color: ${(props) =>  props.theme.colors.primary };
   padding: ${(props) => (props.size === SIZES.SMALL ? '8px 16px' : '13px 20px')};
-  font-size: ${(props) => props.size ? `${theme.fontSizes[props.size]}px` : '12px' };
+  font-size: ${(props) => props.size ? `${props.theme.fontSizes[props.size]}px` : '12px' };
 
   ${(props) =>
     props.appearance === 'primary' &&
     `
-      color: ${(props.bg ? '#fff' : theme.colors[props.appearance])};
-      border: 1px solid ${(props.bg ? props.bg : theme.colors[props.appearance])};
+      color: ${(props.bg ? '#fff' : props.theme.colors[props.appearance])};
+      border: 1px solid ${(props.bg ? props.bg : props.theme.colors[props.appearance])};
     `
   }
 
@@ -41,14 +39,14 @@ export const StyledButton = styled.button<Props>`
     props.appearance === 'secondary' &&
     `
       color: #FFF;
-      background: ${ theme.colors.secondary };
+      background: ${ props.theme.colors.secondary };
     `
   }
 
   ${(props) =>
     props.appearance === 'disabled' &&
     `
-      background: ${ theme.colors.disabled };
+      background: ${ props.theme.colors.disabled };
       color: #FFF;
       cursor: default;
       pointer-events: none;
